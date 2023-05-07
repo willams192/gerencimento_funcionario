@@ -1,9 +1,22 @@
-const express = require('express')
-const app = express()
-const routes = require('./Routes/user_route')
+var express = require('express'),
+
+  mongoose = require('mongoose')
+  ;
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/mean', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(
+  () => { console.log('Database is connected') },
+  err => { console.log('Can not connect to the database' + err) });
 
 
-app.use(routes)
+
+const userRoute = require('./Routes/user_route');
+var app = express();
+
+
+app.use('/user', userRoute);
 
 app.listen(3000, () => {
   console.log('API rodando na porta 3000')
