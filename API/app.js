@@ -2,8 +2,10 @@ var express = require('express'),
 
   mongoose = require('mongoose')
   ;
+
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/mean', {
+mongoose.connect('mongodb://127.0.0.1:27017/Funcionarios', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(

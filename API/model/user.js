@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-let User = Schema({
+const User = Schema({
     name: {
         type: String
     },
     email: {
         type: String
     },
-    avatarurl: {
+    avatarUrl: {
         type: String
     },
 },
