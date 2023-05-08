@@ -15,6 +15,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Funcionarios', {
 
 
 const userRoute = require('./Routes/user_route');
+
 var app = express();
 
 
