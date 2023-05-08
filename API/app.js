@@ -19,7 +19,7 @@ const userRoute = require('./Routes/user_route');
 var app = express();
 
 
-app.use('/user', userRoute);
+app.post('/user', userRoute);
 
 app.listen(3000, () => {
   console.log('API rodando na porta 3000')
