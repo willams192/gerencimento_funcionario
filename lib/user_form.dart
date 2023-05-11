@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import './user.dart';
 import './users.dart';
 
@@ -24,9 +23,44 @@ class _UserFormState extends State<UserForm> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final user = ModalRoute.of(context)?.settings.arguments as User?;
+    final route = ModalRoute.of(context);
+    final user = route != null ? route.settings.arguments as User? : null;
+
     if (user != null) {
       _loadFormData(user);
+    }
+  }
+
+  void _saveForm() {
+    if (_form.currentState != null) {
+      final isValid = _form.currentState!.validate();
+      if (isValid) {
+        _form.currentState!.save();
+        final id = _formData['id'];
+        final name = _formData['name'];
+        final email = _formData['email'];
+        final avatarUrl = _formData['avatarUrl'];
+
+        print('id: $id, name: $name, email: $email, avatarUrl: $avatarUrl');
+
+        if (id != null && name != null && email != null && avatarUrl != null) {
+          Provider.of<Users>(context, listen: false).put(
+            User(
+              id: id,
+              name: name,
+              email: email,
+              avatarUrl: avatarUrl,
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Usuário salvo com sucesso!'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+        Navigator.of(context).pop();
+      }
     }
   }
 
@@ -38,23 +72,7 @@ class _UserFormState extends State<UserForm> {
         actions: [
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () {
-              if (_form.currentState != null) {
-                final isValid = _form.currentState!.validate();
-                if (isValid) {
-                  _form.currentState!.save();
-                  Provider.of<Users>(context, listen: false).put(
-                    User(
-                      id: _formData['id']!,
-                      name: _formData['name']!,
-                      email: _formData['email']!,
-                      avatarUrl: _formData['avatarUrl']!,
-                    ),
-                  );
-                  Navigator.of(context).pop();
-                }
-              }
-            },
+            onPressed: _saveForm,
           )
         ],
       ),
