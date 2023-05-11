@@ -1,13 +1,15 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import './user.dart';
+import 'api.dart';
 
 class Users with ChangeNotifier {
-  final Map<String, User> _items = {};
+  final List<User> _items = [];
 
   // Getter para obter todos os usuários
   List<User> get all {
-    return [..._items.values];
+    _fetchUsers();
+    return [..._items];
   }
 
   // Getter para obter o número de usuários
@@ -22,29 +24,25 @@ class Users with ChangeNotifier {
     }
     if (user.id != null &&
         user.id.trim().isNotEmpty &&
-        _items.containsKey(user.id)) {
+        _items.any((item) => item.id == user.id)) {
       // Atualiza um usuário existente
-      _items.update(
-        user.id,
-        (_) => User(
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          avatarUrl: user.avatarUrl,
-        ),
+      final index = _items.indexWhere((item) => item.id == user.id);
+      _items[index] = User(
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatarUrl: user.avatarUrl,
       );
     } else {
       // Adiciona um novo usuário
       final id = Random().nextDouble().toString();
-      _items.putIfAbsent(
-        id,
-        () => User(
-          id: id,
-          name: user.name,
-          email: user.email,
-          avatarUrl: user.avatarUrl,
-        ),
+      final newUser = User(
+        id: id,
+        name: user.name,
+        email: user.email,
+        avatarUrl: user.avatarUrl,
       );
+      _items.add(newUser);
     }
     notifyListeners();
   }
@@ -52,13 +50,24 @@ class Users with ChangeNotifier {
   // Método para remover um usuário
   void remove(User user) {
     if (user != null && user.id != null) {
-      _items.remove(user.id);
+      _items.removeWhere((item) => item.id == user.id);
       notifyListeners();
     }
   }
 
   // Método para obter um usuário pelo índice
   User byIndex(int i) {
-    return _items.values.elementAt(i);
+    return _items[i];
+  }
+
+  // Método privado para buscar usuários na API e atualizar a lista
+  Future<void> _fetchUsers() async {
+    try {
+      List<User> users = await Api.getUsers();
+      _items.clear();
+      _items.addAll(users);
+    } catch (e) {
+      // Lida com erros aqui, como mostrar uma mensagem na tela
+    }
   }
 }
