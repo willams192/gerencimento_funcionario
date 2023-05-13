@@ -14,10 +14,10 @@ Assim que clonar o repósitorio roda o seguinte script no terminal do VScode:
 <br><br>
 
 Depois vai fazer os seguintes passos:
-
+<br><br>
 
   **_cd ./API/_**     aqui você vai entrar na pasta da API
-  
+  <br><br>
   
   **_node app.js_**   aqui você vai subir o back-end, ou seja , o servidor local
 
