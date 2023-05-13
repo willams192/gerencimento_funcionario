@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../Aplicacao/Gerenciador de usuarios/users.dart';
+import '../Gerenciador de usuarios/users.dart';
 import 'package:provider/provider.dart';
 
-import '../Aplicacao/main.dart';
+import '../main.dart';
 
 class UserList extends StatefulWidget {
   @override
