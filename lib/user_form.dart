@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 import './user.dart';
 import './users.dart';
 
@@ -11,6 +12,7 @@ class UserForm extends StatefulWidget {
 class _UserFormState extends State<UserForm> {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
+  final _uuid = Uuid();
 
   void _loadFormData(User user) {
     _formData['id'] = user.id;
@@ -36,7 +38,7 @@ class _UserFormState extends State<UserForm> {
       final isValid = _form.currentState!.validate();
       if (isValid) {
         _form.currentState!.save();
-        final id = _formData['id'];
+        final id = _formData['id'] ?? _uuid.v4();
         final name = _formData['name'];
         final email = _formData['email'];
         final avatarUrl = _formData['avatarUrl'];
