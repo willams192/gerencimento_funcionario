@@ -2,24 +2,32 @@
 
 Primeiro projeto em flutter consumindo e montando uma API, só esta funcionando o POST o Delete e Update não funciona, os dados só serão atualizados e excluídos localmente e não no banco de dados.
 
+
 ## Vamos Começar
-<br>
+
+
 Assim que clonar o repósitorio roda o seguinte script no terminal do VScode:
-<br>
+
+
 **flutter pub get** Esse comando vai instalar as dependências necéssarias para rodar o projeto. 
-<br>
+
+
 Depois vai fazer os seguintes passos:
-<br>
+
+
   **cd ./API/** aqui você vai entrar na pasta da API
   **node app.js**  aqui você vai subir o back-end, ou seja , o servidor local
-<br>
+
+
 Para rodar vai ser necéssario estar com o emulador aberto ou conectar o seu dispositivo móvel no cabo USB da sua máquina, com esse preparativos prontos, você vai nessa opção:
 ![image](https://github.com/willams192/gerencimento_funcionario/assets/84344077/05be3f46-d3d9-4637-af54-7b3f6fae6cab)
-<br>
+
+
 Quando for preencher o fórmulario para salvar os dados do funcionário vai ser preciso preencher três campos:
-<br>
-      - Nome => é obrigatório
-      - Email => é obrigatório
-      - Avatar Url => não é obrigatório
+
+   - Nome => é obrigatório\
+   - Email => é obrigatório\
+   - Avatar Url => não é obrigatório\
+
 
 Se caso quiser preencher o terceiro campo vou disponibilizar algumas URLs para colocar nesse campo
