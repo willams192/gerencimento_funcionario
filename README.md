@@ -23,7 +23,7 @@ Depois vai fazer os seguintes passos:
 
 <br><br>
 
-Para rodar vai ser necéssario estar com o emulador aberto ou conectar o seu dispositivo móvel no cabo USB da sua máquina, com esse preparativos prontos, você vai nessa opção:
+Para rodar vai ser necéssario estar com o emulador aberto ou conectar o seu dispositivo móvel no cabo USB da sua máquina, com esse preparativos prontos, você vai nessa opção (lembrando se der algum erro tente abrir o arquivo main.dart, e depois tente executar novamente):
 ![image](https://github.com/willams192/gerencimento_funcionario/assets/84344077/05be3f46-d3d9-4637-af54-7b3f6fae6cab)
 
 <br><br>
