@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './users.dart';
-import './user_form.dart';
-import './user_list.dart';
+import './aplicação/users.dart';
+import './aplicação/user_form.dart';
+import './aplicação/user_list.dart';
 
 class AppRoutes {
   static const USER_FORM = '/user-form';
