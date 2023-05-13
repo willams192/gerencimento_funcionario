@@ -7,7 +7,7 @@ Primeiro projeto em flutter consumindo e montando uma API, só esta funcionando 
 
 
 Assim que clonar o repósitorio roda o seguinte script no terminal do VScode:
-
+<br><br>
 
 
 **_flutter pub get_**    Esse comando vai instalar as dependências necéssarias para rodar o projeto. 
