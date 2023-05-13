@@ -1,6 +1,6 @@
 # Gerenciador de Funcionários
 
-A new Flutter project.
+Meu primeiro Projeto de Flutter consumindo e montando uma API, para realizar um CRUD.
 
 ## Getting Started
 
