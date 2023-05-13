@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import './user.dart';
 import 'api.dart';
@@ -35,7 +35,7 @@ class Users with ChangeNotifier {
       );
     } else {
       // Adiciona um novo usuário
-      final id = Random().nextDouble().toString();
+      final id = Uuid().v4();
       final newUser = User(
         id: id,
         name: user.name,
@@ -67,7 +67,7 @@ class Users with ChangeNotifier {
       _items.clear();
       _items.addAll(users);
     } catch (e) {
-      // Lida com erros aqui, como mostrar uma mensagem na tela
+      // não esquecer de fazer os erros -------------------------------------------------------------------------------------------------
     }
   }
 }
