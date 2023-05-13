@@ -1,4 +1,4 @@
-# flutter_crud
+# Gerenciador de Funcionários
 
 A new Flutter project.
 
