@@ -1,6 +1,6 @@
-# flutter_crud
+# Gerenciador de Funcionarios
 
-A new Flutter project.
+Primeiro projeto em flutter consumindo e montando uma API.
 
 ## Getting Started
 
