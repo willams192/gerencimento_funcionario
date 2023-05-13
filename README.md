@@ -37,4 +37,11 @@ Quando for preencher o fórmulario para salvar os dados do funcionário vai ser 
 
 <br><br>
 
-Se caso quiser preencher o terceiro campo vou disponibilizar algumas URLs para colocar nesse campo
+Se caso quiser preencher o terceiro campo vou disponibilizar algumas URLs para colocar nesse campo:
+<br><br>
+
+   - https://cdn.pixabay.com/photo/2014/04/03/10/32/businessman-310819_960_720.png
+   - https://cdn.pixabay.com/photo/2016/08/20/05/36/avatar-1606914_960_720.png
+   - https://cdn.pixabay.com/photo/2016/08/20/05/36/avatar-1606914_960_720.png
+   - https://cdn.pixabay.com/photo/2014/04/02/14/11/male-306408_960_720.png
+
