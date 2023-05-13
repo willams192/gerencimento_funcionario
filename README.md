@@ -25,9 +25,9 @@ Para rodar vai ser necéssario estar com o emulador aberto ou conectar o seu dis
 
 Quando for preencher o fórmulario para salvar os dados do funcionário vai ser preciso preencher três campos:
 
-   - Nome => é obrigatório\
-   - Email => é obrigatório\
-   - Avatar Url => não é obrigatório\
+   - Nome => é obrigatório
+   - Email => é obrigatório
+   - Avatar Url => não é obrigatório
 
 
 Se caso quiser preencher o terceiro campo vou disponibilizar algumas URLs para colocar nesse campo
