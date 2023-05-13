@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import './user.dart';
 import './users.dart';
+import 'api.dart';
 
 class UserForm extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _UserFormState extends State<UserForm> {
     }
   }
 
-  void _saveForm() {
+  void _saveForm() async {
     if (_form.currentState != null) {
       final isValid = _form.currentState!.validate();
       if (isValid) {
@@ -46,22 +47,28 @@ class _UserFormState extends State<UserForm> {
         print('id: $id, name: $name, email: $email, avatarUrl: $avatarUrl');
 
         if (id != null && name != null && email != null && avatarUrl != null) {
-          Provider.of<Users>(context, listen: false).put(
-            User(
-              id: id,
-              name: name,
-              email: email,
-              avatarUrl: avatarUrl,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Usuário salvo com sucesso!'),
-              duration: Duration(seconds: 2),
-            ),
-          );
+          final user =
+              User(id: id, name: name, email: email, avatarUrl: avatarUrl);
+          try {
+            await Api.addUser(user);
+            Provider.of<Users>(context, listen: false).put(user);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Funcionário salvo com sucesso!'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+            Navigator.of(context).pop();
+          } catch (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Erro ao salvar funcionário.'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+            print(error);
+          }
         }
-        Navigator.of(context).pop();
       }
     }
   }
@@ -70,7 +77,7 @@ class _UserFormState extends State<UserForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de Usuário'),
+        title: Text('Formulário de Funcionário'),
         actions: [
           IconButton(
             icon: Icon(Icons.save),
