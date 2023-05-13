@@ -18,7 +18,7 @@ Depois vai fazer os seguintes passos:
 
 
 
-  **_cd ./API/_**     aqui você vai entrar na pasta da API
+  **_cd ./API/_**     aqui você vai entrar na pasta da API\
   **_node app.js_**   aqui você vai subir o back-end, ou seja , o servidor local
 
 
