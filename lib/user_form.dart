@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -44,18 +45,17 @@ class _UserFormState extends State<UserForm> {
         final email = _formData['email'];
         final avatarUrl = _formData['avatarUrl'];
 
-        print('id: $id, name: $name, email: $email, avatarUrl: $avatarUrl');
-
         if (id != null && name != null && email != null && avatarUrl != null) {
-          final url = 'http://127.0.0.1:3000/funcionario/add';
+          final url = 'http://192.168.0.100:3000/funcionario/add';
           final response = await http.post(
             Uri.parse(url),
-            body: {
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode({
               'id': id,
               'name': name,
               'email': email,
               'avatarUrl': avatarUrl,
-            },
+            }),
           );
           if (response.statusCode == 200) {
             Provider.of<Users>(context, listen: false).put(User(

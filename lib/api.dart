@@ -6,9 +6,8 @@ class Api {
   static const String url = 'http://192.168.0.100:3000';
 
   static Future<List<User>> getUsers() async {
-    print("aqui 1");
     final response = await http.get(Uri.parse('$url/funcionario'));
-    print(response);
+
     if (response.statusCode == 200) {
       final List<dynamic> usersJson = json.decode(response.body);
       final List<User> funcionarios =
@@ -25,12 +24,12 @@ class Api {
         Uri.parse('$url/funcionario/add'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
+          'id': user.id,
           'name': user.name,
           'email': user.email,
           'avatarUrl': user.avatarUrl
         }),
       );
-
       if (response.statusCode == 201 &&
           response.body.contains('usuário cadastrado com sucesso')) {
         print('User added successfully');

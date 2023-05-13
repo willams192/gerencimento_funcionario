@@ -10,6 +10,7 @@ let Funcionario = require('../model/funcionario')
 // adiciona o usuário
 funcionarioRoutes.route('/add').post(async function (req, res) {
     let funcionario = new Funcionario(req.body);
+    console.log(funcionario)
     funcionario.save(req.body)
         .then(result => {
             res.status(200).json({ 'status': 'sucess', 'msg': 'usuário cadastrado com sucesso' });
