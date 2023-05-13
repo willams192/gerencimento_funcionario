@@ -11,11 +11,9 @@ Assim que clonar o repósitorio roda o seguinte script no terminal do VScode:
 
 
 **_flutter pub get_**    Esse comando vai instalar as dependências necéssarias para rodar o projeto. 
-
 <br><br>
 
 Depois vai fazer os seguintes passos:
-
 
 
   **_cd ./API/_**     aqui você vai entrar na pasta da API
