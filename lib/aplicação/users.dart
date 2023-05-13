@@ -1,6 +1,6 @@
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
-import './user.dart';
+import 'user.dart';
 import 'api.dart';
 
 class Users with ChangeNotifier {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
-import './user.dart';
-import './users.dart';
+import 'user.dart';
+import 'users.dart';
 
 class UserForm extends StatefulWidget {
   @override
