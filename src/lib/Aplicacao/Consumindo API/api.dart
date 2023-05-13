@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'user.dart';
+import '../Contrutor/user.dart';
 
 class Api {
   static const String url = 'http://192.168.0.100:3000';

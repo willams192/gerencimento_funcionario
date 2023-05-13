@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
-import './user.dart';
-import 'api.dart';
+import '../Contrutor/user.dart';
+import '../Consumindo API/api.dart';
 
 class Users with ChangeNotifier {
   final List<User> _items = [];
