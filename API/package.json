@@ -1,7 +1,7 @@
 {
-  "name": "gerencimento_funcionario",
+  "name": "helios",
   "version": "1.0.0",
-  "description": "A new Flutter project.",
+  "description": "Um gerenciador de funcionários.",
   "main": "app.js",
   "directories": {
     "lib": "lib",
