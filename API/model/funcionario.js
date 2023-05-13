@@ -15,7 +15,7 @@ const Funcionario = Schema({
     },
 },
     {
-        collection: 'Funcionario'
+        collection: 'User'
     });
 
 module.exports = mongoose.model('Funcionario', Funcionario);
