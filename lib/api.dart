@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'user.dart';
 
 class Api {
-  static const String url = 'http://127.0.0.1:3000/';
+  static const String url = 'http://192.168.0.100:3000';
 
   static Future<List<User>> getUsers() async {
     print("aqui 1");
@@ -20,19 +20,25 @@ class Api {
   }
 
   static Future<void> addUser(User user) async {
-    print("AQUI");
-    final response = await http.post(
-      Uri.parse('http://localhost:3000/funcionario/add'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'name': user.name,
-        'email': user.email,
-        'avatarUrl': user.avatarUrl
-      }),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse('$url/funcionario/add'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'name': user.name,
+          'email': user.email,
+          'avatarUrl': user.avatarUrl
+        }),
+      );
 
-    if (response.statusCode != 201) {
-      throw Exception('Failed to add user');
+      if (response.statusCode == 201 &&
+          response.body.contains('usuário cadastrado com sucesso')) {
+        print('User added successfully');
+      } else {
+        throw Exception('Failed to add user: ${response.body}');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

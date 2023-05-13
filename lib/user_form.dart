@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 import './user.dart';
 import './users.dart';
-import 'api.dart';
 
 class UserForm extends StatefulWidget {
   @override
@@ -47,28 +47,39 @@ class _UserFormState extends State<UserForm> {
         print('id: $id, name: $name, email: $email, avatarUrl: $avatarUrl');
 
         if (id != null && name != null && email != null && avatarUrl != null) {
-          final user =
-              User(id: id, name: name, email: email, avatarUrl: avatarUrl);
-          try {
-            await Api.addUser(user);
-            Provider.of<Users>(context, listen: false).put(user);
+          final url = 'http://127.0.0.1:3000/funcionario/add';
+          final response = await http.post(
+            Uri.parse(url),
+            body: {
+              'id': id,
+              'name': name,
+              'email': email,
+              'avatarUrl': avatarUrl,
+            },
+          );
+          if (response.statusCode == 200) {
+            Provider.of<Users>(context, listen: false).put(User(
+              id: id,
+              name: name,
+              email: email,
+              avatarUrl: avatarUrl,
+            ));
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Funcionário salvo com sucesso!'),
                 duration: Duration(seconds: 2),
               ),
             );
-            Navigator.of(context).pop();
-          } catch (error) {
+          } else {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Erro ao salvar funcionário.'),
                 duration: Duration(seconds: 2),
               ),
             );
-            print(error);
           }
         }
+        Navigator.of(context).pop();
       }
     }
   }
