@@ -18,10 +18,17 @@ flutter pub get
 Depois vai fazer os seguintes passos:
 <br><br>
 
-  **_cd ./API/_**  -   aqui você vai entrar na pasta da API
+```bash
+   cd ./API/
+``` 
+-   aqui você vai entrar na pasta da API
   <br><br>
   
-  **_node app.js_** -  aqui você vai subir o back-end, ou seja , o servidor local
+  
+  ```bash
+   cnode app.js
+``` 
+-  aqui você vai subir o back-end, ou seja , o servidor local
 
 <br><br>
 
