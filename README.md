@@ -11,7 +11,8 @@ Assim que clonar o repósitorio roda o seguinte script no terminal do VScode:
 
 ```bash
 flutter pub get
-``` -  Esse comando vai instalar as dependências necéssarias para rodar o projeto. 
+``` 
+-  Esse comando vai instalar as dependências necéssarias para rodar o projeto. 
 <br><br>
 
 Depois vai fazer os seguintes passos:
