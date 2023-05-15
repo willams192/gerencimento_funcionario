@@ -26,7 +26,7 @@ Depois vai fazer os seguintes passos:
   
   
   ```bash
-   cnode app.js
+   node app.js
 ``` 
 -  aqui você vai subir o back-end, ou seja , o servidor local
 
