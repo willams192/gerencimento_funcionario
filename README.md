@@ -3,6 +3,27 @@
 Primeiro projeto em flutter consumindo e montando uma API, só esta funcionando o POST o Delete e Update não funciona, os dados só serão atualizados e excluídos localmente e não no banco de dados.
 
 
+##AVISO
+
+
+Antes de começar será necessário trocar o IP se for Wi faça o seguinte comando:
+```bash
+ipconfig
+``` 
+Após esse comando você irá pegar o número do iPV4
+![image](https://github.com/willams192/gerencimento_funcionario/assets/84344077/68573fc3-2b6c-4610-bdf0-dd4881af1aed)
+
+<br><br>
+
+Com o número do IP copiado agora precisa alterar nessa parte do projeto
+![image](https://github.com/willams192/gerencimento_funcionario/assets/84344077/2cb69a52-93d9-4e22-95fb-ef7344d4e3af)
+<br><br>
+Caminho para o arquivo e a linha que precisa ser alterada:
+```bash
+gerencimento_funcionario\lib\aplicação\user_form.dart
+``` 
+na linha 50
+
 ## Vamos Começar
 
 
@@ -42,12 +63,12 @@ Quando for preencher o fórmulario para salvar os dados do funcionário vai ser 
 
    - Nome => é obrigatório
    - Email => é obrigatório
-   - Avatar Url =>  é obrigatório
+   - Avatar Url => não é obrigatório
 
 <br><br>
 
 
-Vou disponibilizar algumas URLs para colocar nesse campo do avatar:
+Se caso quiser vou disponibilizar algumas URLs para colocar nesse campo do avatar:
 <br><br>
 
    - https://cdn.pixabay.com/photo/2014/04/03/10/32/businessman-310819_960_720.png
