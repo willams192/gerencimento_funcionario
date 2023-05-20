@@ -42,7 +42,8 @@ class Api {
   }
 
   static Future<void> removeUser(String id) async {
-    final response = await http.delete(Uri.parse('$url/funcionario/$id'));
+    final response =
+        await http.delete(Uri.parse('$url/funcionario/delete/$id'));
 
     if (response.statusCode != 200) {
       throw Exception('Failed to remove user');
