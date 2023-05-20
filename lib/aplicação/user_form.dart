@@ -46,7 +46,8 @@ class _UserFormState extends State<UserForm> {
         final avatarUrl = _formData['avatarUrl'];
 
         if (id != null && name != null && email != null && avatarUrl != null) {
-          final url = 'http://192.168.0.100:3000/funcionario/add';
+          final url =
+              'http://192.168.0.100:3000/funcionario/add'; // Trocar o número do IP
           final response = await http.post(
             Uri.parse(url),
             headers: {'Content-Type': 'application/json'},
