@@ -42,11 +42,12 @@ Quando for preencher o fórmulario para salvar os dados do funcionário vai ser 
 
    - Nome => é obrigatório
    - Email => é obrigatório
-   - Avatar Url => não é obrigatório
+   - Avatar Url =>  é obrigatório
 
 <br><br>
 
-Se caso quiser preencher o terceiro campo vou disponibilizar algumas URLs para colocar nesse campo:
+
+Vou disponibilizar algumas URLs para colocar nesse campo do avatar:
 <br><br>
 
    - https://cdn.pixabay.com/photo/2014/04/03/10/32/businessman-310819_960_720.png
