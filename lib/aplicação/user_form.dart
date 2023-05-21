@@ -65,7 +65,7 @@ class _UserFormState extends State<UserForm> {
               email: email,
               avatarUrl: avatarUrl,
             );
-            print('esse é o $newUserId');
+
             Provider.of<Users>(context, listen: false).put(newUser);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
