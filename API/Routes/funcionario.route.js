@@ -7,18 +7,20 @@ const funcionarioRoutes = express.Router();
 
 let Funcionario = require('../model/funcionario')
 
-// adiciona o usuário
 funcionarioRoutes.route('/add').post(async function (req, res) {
     let funcionario = new Funcionario(req.body);
-    console.log(funcionario)
-    funcionario.save(req.body)
+    funcionario.save()
         .then(result => {
-            res.status(200).json({ 'status': 'sucess', 'msg': 'usuário cadastrado com sucesso' });
+            console.log(result); // Verificar se o ID está presente no resultado
+            const newUserId = result._id.toString(); // Obtém o valor do ID como uma string
+            res.status(200).json({ '_id': newUserId });
         })
         .catch(err => {
             res.status(409).json({ 'status': 'failure', 'msg': 'usuário não cadastrado' + err.message })
         });
 });
+
+
 
 
 
