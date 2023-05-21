@@ -20,6 +20,7 @@ class _UserFormState extends State<UserForm> {
     _formData['name'] = user.name;
     _formData['email'] = user.email;
     _formData['avatarUrl'] = user.avatarUrl;
+    _formData['cargo'] = user.cargo;
   }
 
   @override
@@ -42,8 +43,12 @@ class _UserFormState extends State<UserForm> {
         final name = _formData['name'];
         final email = _formData['email'];
         final avatarUrl = _formData['avatarUrl'];
+        final cargo = _formData['cargo'];
 
-        if (name != null && email != null && avatarUrl != null) {
+        if (name != null &&
+            email != null &&
+            avatarUrl != null &&
+            cargo != null) {
           final url = 'http://192.168.0.199:3000/funcionario/add';
           final response = await http.post(
             Uri.parse(url),
@@ -52,18 +57,18 @@ class _UserFormState extends State<UserForm> {
               'name': name,
               'email': email,
               'avatarUrl': avatarUrl,
+              'cargo': cargo,
             }),
           );
           if (response.statusCode == 200) {
             final responseData = json.decode(response.body);
             final newUserId = responseData != null ? responseData['_id'] : null;
             final newUser = User(
-              id: newUserId ??
-                  _uuid
-                      .v4(), // Usar o ID retornado pela API se for válido, caso contrário, gerar localmente
+              id: newUserId ?? _uuid.v4(),
               name: name,
               email: email,
               avatarUrl: avatarUrl,
+              cargo: cargo,
             );
 
             Provider.of<Users>(context, listen: false).put(newUser);
@@ -96,7 +101,7 @@ class _UserFormState extends State<UserForm> {
           IconButton(
             icon: Icon(Icons.save),
             onPressed: _saveForm,
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -126,7 +131,9 @@ class _UserFormState extends State<UserForm> {
                   if (value == null || value.trim().isEmpty) {
                     return 'E-mail inválido';
                   }
-                  if (!value.contains('@')) {
+                  final emailRegex =
+                      RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+                  if (!emailRegex.hasMatch(value)) {
                     return 'Informe um e-mail válido';
                   }
                   return null;
@@ -137,6 +144,17 @@ class _UserFormState extends State<UserForm> {
                 initialValue: _formData['avatarUrl'],
                 decoration: InputDecoration(labelText: 'URL do Avatar'),
                 onSaved: (value) => _formData['avatarUrl'] = value!,
+              ),
+              TextFormField(
+                initialValue: _formData['cargo'],
+                decoration: InputDecoration(labelText: 'Cargo'),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Cargo inválido';
+                  }
+                  return null;
+                },
+                onSaved: (value) => _formData['cargo'] = value!,
               ),
             ],
           ),
