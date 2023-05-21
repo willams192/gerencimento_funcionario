@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './users.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
+import 'api.dart';
 
 class UserList extends StatefulWidget {
   @override
@@ -39,7 +40,14 @@ class _UserListState extends State<UserList> {
                     IconButton(
                       icon: Icon(Icons.delete),
                       color: Colors.red,
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          await Api.removeUser(users.byIndex(i).id);
+                          users.remove(users.byIndex(i));
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
                     ),
                   ],
                 ),
