@@ -35,7 +35,7 @@ class Users with ChangeNotifier {
       );
     } else {
       // Adiciona um novo usuário
-      final id = Uuid().v4();
+      final id = user.id;
       final newUser = User(
         id: id,
         name: user.name,
@@ -50,7 +50,6 @@ class Users with ChangeNotifier {
   // Método para remover um usuário
   void remove(User user) {
     if (user != null && user.id != null) {
-      print("AQUIIII");
       _items.removeWhere((item) => item.id == user.id);
       notifyListeners();
     }
@@ -65,13 +64,22 @@ class Users with ChangeNotifier {
   Future<void> _fetchUsers() async {
     try {
       List<User> users = await Api.getUsers();
-      _items.clear();
-      _items.addAll(users.map((user) => User(
-            id: user.id, // Usar o ID retornado pela API
+
+      for (var user in users) {
+        if (_items.any((item) => item.id == user.id)) {
+          // Atualiza um usuário existente
+          final index = _items.indexWhere((item) => item.id == user.id);
+          _items[index] = User(
+            id: user.id,
             name: user.name,
             email: user.email,
             avatarUrl: user.avatarUrl,
-          )));
+          );
+        } else {
+          // Adiciona um novo usuário
+          _items.add(user);
+        }
+      }
     } catch (e) {
       // Lidar com o erro de forma adequada
     }
