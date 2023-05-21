@@ -47,4 +47,24 @@ class Api {
       throw Exception('Failed to remove user');
     }
   }
+
+  static Future<void> updateUser(User user) async {
+    final response = await http.put(
+      Uri.parse('$url/funcionario/update/${user.id}'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'name': user.name,
+        'email': user.email,
+        'avatarUrl': user.avatarUrl,
+        'cargo': user.cargo
+      }),
+    );
+
+    if (response.statusCode == 200 &&
+        response.body.contains('Usuário atualizado com sucesso')) {
+      print('User updated successfully');
+    } else {
+      throw Exception('Failed to update user: ${response.body}');
+    }
+  }
 }
