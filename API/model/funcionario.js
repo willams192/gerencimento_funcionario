@@ -13,6 +13,9 @@ const Funcionario = Schema({
     avatarUrl: {
         type: String
     },
+    cargo: {
+        type: String
+    },
 },
     {
         collection: 'User'
