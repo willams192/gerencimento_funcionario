@@ -65,9 +65,8 @@ funcionarioRoutes.route('/update/:id').put(function (req, res) {
     });
 });
 
-funcionarioRoutes.route('/delete/:uuid').delete(function (req, res) {
-    const uuidToDelete = req.params.uuid;
-    Funcionario.findOneAndRemove({ uuid: uuidToDelete }, function (err,) {
+funcionarioRoutes.route('/delete/:id').delete(function (req, res) {
+    Funcionario.findByIdAndRemove({ _id: req.params.id }, function (err,) {
         if (err) {
             res.status(400).send({ 'status': 'failure', 'msg': 'Algo deu errado' })
         } else {
