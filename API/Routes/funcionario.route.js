@@ -2,7 +2,7 @@ const express = require('express');
 const funcionario = require('../model/funcionario');
 const app = express();
 const funcionarioRoutes = express.Router();
-
+const uuid = require('uuid');
 
 
 let Funcionario = require('../model/funcionario')
@@ -65,8 +65,9 @@ funcionarioRoutes.route('/update/:id').put(function (req, res) {
     });
 });
 
-funcionarioRoutes.route('/delete/:id').delete(function (req, res) {
-    Funcionario.findByIdAndRemove({ _id: req.params.id }, function (err,) {
+funcionarioRoutes.route('/delete/:uuid').delete(function (req, res) {
+    const uuidToDelete = req.params.uuid;
+    Funcionario.findOneAndRemove({ uuid: uuidToDelete }, function (err,) {
         if (err) {
             res.status(400).send({ 'status': 'failure', 'msg': 'Algo deu errado' })
         } else {

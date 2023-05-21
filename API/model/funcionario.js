@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Funcionario = Schema({
+    id: {
+        type: String,
+        primary: true,
+    },
     name: {
         type: String
     },

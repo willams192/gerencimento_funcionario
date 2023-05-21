@@ -20,14 +20,4 @@ class User {
       avatarUrl: json['avatarUrl'],
     );
   }
-
-  // Implementação do método toJson
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
-      'email': email,
-      'avatarUrl': avatarUrl,
-    };
-  }
 }
