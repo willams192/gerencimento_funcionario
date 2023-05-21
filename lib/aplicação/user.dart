@@ -3,21 +3,22 @@ class User {
   String name;
   String email;
   String avatarUrl;
+  String cargo;
 
-  User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.avatarUrl,
-  });
+  User(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.avatarUrl,
+      required this.cargo});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['_id'],
-      name: json['name'],
-      email: json['email'],
-      avatarUrl: json['avatarUrl'],
-    );
+        id: json['_id'],
+        name: json['name'],
+        email: json['email'],
+        avatarUrl: json['avatarUrl'],
+        cargo: json['cargo']);
   }
 
   Map<String, dynamic> toJson() {
@@ -26,6 +27,7 @@ class User {
       'name': name,
       'email': email,
       'avatarUrl': avatarUrl,
+      'cargo': cargo
     };
   }
 }
