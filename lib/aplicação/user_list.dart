@@ -42,13 +42,14 @@ class _UserListState extends State<UserList> {
                       color: Colors.red,
                       onPressed: () async {
                         try {
-                          await Api.removeUser(users.byIndex(i).id);
+                          final userId = users.byIndex(i).id;
+                          await Api.removeUser(userId);
                           users.remove(users.byIndex(i));
                         } catch (e) {
                           print(e);
                         }
                       },
-                    ),
+                    )
                   ],
                 ),
               ),
