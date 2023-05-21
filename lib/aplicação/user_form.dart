@@ -17,7 +17,6 @@ class _UserFormState extends State<UserForm> {
   final _uuid = Uuid();
 
   void _loadFormData(User user) {
-    _formData['id'] = user.id;
     _formData['name'] = user.name;
     _formData['email'] = user.email;
     _formData['avatarUrl'] = user.avatarUrl;
@@ -40,30 +39,34 @@ class _UserFormState extends State<UserForm> {
       final isValid = _form.currentState!.validate();
       if (isValid) {
         _form.currentState!.save();
-        final id = _formData['id'] ?? _uuid.v4();
         final name = _formData['name'];
         final email = _formData['email'];
         final avatarUrl = _formData['avatarUrl'];
 
-        if (id != null && name != null && email != null && avatarUrl != null) {
-          final url = 'http://192.168.0.100:3000/funcionario/add';
+        if (name != null && email != null && avatarUrl != null) {
+          final url = 'http://192.168.0.199:3000/funcionario/add';
           final response = await http.post(
             Uri.parse(url),
             headers: {'Content-Type': 'application/json'},
             body: json.encode({
-              'id': id,
               'name': name,
               'email': email,
               'avatarUrl': avatarUrl,
             }),
           );
           if (response.statusCode == 200) {
-            Provider.of<Users>(context, listen: false).put(User(
-              id: id,
+            final responseData = json.decode(response.body);
+            final newUserId = responseData != null ? responseData['_id'] : null;
+            final newUser = User(
+              id: newUserId ??
+                  _uuid
+                      .v4(), // Usar o ID retornado pela API se for válido, caso contrário, gerar localmente
               name: name,
               email: email,
               avatarUrl: avatarUrl,
-            ));
+            );
+            print('esse é o $newUserId');
+            Provider.of<Users>(context, listen: false).put(newUser);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Funcionário salvo com sucesso!'),
