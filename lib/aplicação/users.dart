@@ -50,6 +50,7 @@ class Users with ChangeNotifier {
   // Método para remover um usuário
   void remove(User user) {
     if (user != null && user.id != null) {
+      print("AQUIIII");
       _items.removeWhere((item) => item.id == user.id);
       notifyListeners();
     }
@@ -65,9 +66,14 @@ class Users with ChangeNotifier {
     try {
       List<User> users = await Api.getUsers();
       _items.clear();
-      _items.addAll(users);
+      _items.addAll(users.map((user) => User(
+            id: user.id, // Usar o ID retornado pela API
+            name: user.name,
+            email: user.email,
+            avatarUrl: user.avatarUrl,
+          )));
     } catch (e) {
-      // não esquecer de fazer os erros -------------------------------------------------------------------------------------------------
+      // Lidar com o erro de forma adequada
     }
   }
 }
