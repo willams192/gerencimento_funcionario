@@ -39,7 +39,10 @@ class _UserListState extends State<UserList> {
                     IconButton(
                       icon: Icon(Icons.edit),
                       color: Colors.orange,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.USER_FORM,
+                            arguments: users.byIndex(i));
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
