@@ -64,6 +64,7 @@ Quando for preencher o fórmulario para salvar os dados do funcionário vai ser 
    - Nome => é obrigatório
    - Email => é obrigatório
    - Avatar Url => não é obrigatório
+   - Cargo => é obrigatório
 
 <br><br>
 
