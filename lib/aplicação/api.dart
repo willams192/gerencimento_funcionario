@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'user.dart';
 
 class Api {
-  static const String url = 'http://192.168.0.199:3000';
+  static const String url =
+      'http://192.168.0.197:3000'; // ALTERAR AQUI O IP, LEMBRANDO SE FOR WINDOWS FAÇA O COMANDO "ipconfig" PARA DESCOBRIR O IP
 
   static Future<List<User>> getUsers() async {
     final response = await http.get(Uri.parse('$url/funcionario'));
@@ -56,7 +57,7 @@ class Api {
         'name': user.name,
         'email': user.email,
         'avatarUrl': user.avatarUrl,
-        'cargo': user.cargo
+        'cargo': user.cargo,
       }),
     );
 
