@@ -16,13 +16,13 @@ Após esse comando você irá pegar o número do iPV4
 
 <br><br>
 Com o número do IP copiado agora precisa alterar nessa parte do projeto
-![image](https://github.com/willams192/gerencimento_funcionario/assets/84344077/2cb69a52-93d9-4e22-95fb-ef7344d4e3af)
+![image](https://github.com/willams192/gerencimento_funcionario/assets/84344077/236f17a7-6a3a-4d63-a961-75cf7a7cf131)
 <br><br>
 Caminho para o arquivo e a linha que precisa ser alterada:
 ```bash
-gerencimento_funcionario\lib\aplicação\user_form.dart
+gerencimento_funcionario\lib\aplicação\api.dart
 ``` 
-   - na linha 50
+   - na linha 6
 <br><br>
 ## Vamos Começar
 
