@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 import 'user.dart';
+import 'api.dart';
 import 'users.dart';
 
 class UserForm extends StatefulWidget {
@@ -49,45 +50,91 @@ class _UserFormState extends State<UserForm> {
             email != null &&
             avatarUrl != null &&
             cargo != null) {
-          final url = 'http://192.168.0.199:3000/funcionario/add';
-          final response = await http.post(
-            Uri.parse(url),
-            headers: {'Content-Type': 'application/json'},
-            body: json.encode({
-              'name': name,
-              'email': email,
-              'avatarUrl': avatarUrl,
-              'cargo': cargo,
-            }),
-          );
-          if (response.statusCode == 200) {
-            final responseData = json.decode(response.body);
-            final newUserId = responseData != null ? responseData['_id'] : null;
-            final newUser = User(
-              id: newUserId ?? _uuid.v4(),
-              name: name,
-              email: email,
-              avatarUrl: avatarUrl,
-              cargo: cargo,
+          final user = ModalRoute.of(context)?.settings.arguments as User?;
+
+          if (user != null) {
+            // Código para atualizar o usuário existente
+            final url = '${Api.url}/funcionario/update/${user.id}';
+            final response = await http.put(
+              Uri.parse(url),
+              headers: {'Content-Type': 'application/json'},
+              body: json.encode({
+                'name': name,
+                'email': email,
+                'avatarUrl': avatarUrl,
+                'cargo': cargo,
+              }),
             );
 
-            Provider.of<Users>(context, listen: false).put(newUser);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Funcionário salvo com sucesso!'),
-                duration: Duration(seconds: 2),
-              ),
-            );
+            if (response.statusCode == 200) {
+              final updatedUser = User(
+                id: user.id,
+                name: name,
+                email: email,
+                avatarUrl: avatarUrl,
+                cargo: cargo,
+              );
+              Provider.of<Users>(context, listen: false).put(updatedUser);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Funcionário atualizado com sucesso!'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Erro ao atualizar funcionário.'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+            Navigator.of(context).pop();
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Erro ao salvar funcionário.'),
-                duration: Duration(seconds: 2),
-              ),
+            // Código para adicionar um novo usuário
+            final url = '${Api.url}/funcionario/add';
+            final response = await http.post(
+              Uri.parse(url),
+              headers: {'Content-Type': 'application/json'},
+              body: json.encode({
+                'name': name,
+                'email': email,
+                'avatarUrl': avatarUrl,
+                'cargo': cargo,
+              }),
             );
+
+            if (response.statusCode == 200) {
+              final responseData = json.decode(response.body);
+              final newUserId =
+                  responseData != null ? responseData['_id'] : null;
+              final newUser = User(
+                id: newUserId ?? _uuid.v4(),
+                name: name,
+                email: email,
+                avatarUrl: avatarUrl,
+                cargo: cargo,
+              );
+
+              Provider.of<Users>(context, listen: false).put(newUser);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Funcionário salvo com sucesso!'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Erro ao salvar funcionário.'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+
+            Navigator.of(context).pop();
           }
         }
-        Navigator.of(context).pop();
       }
     }
   }
