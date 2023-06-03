@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'user.dart';
 
 class Api {
-  static const String url = 'http://192.168.0.100:3000';
+  static const String url =
+      'http://192.168.0.197:3000'; // ALTERAR AQUI O IP, LEMBRANDO SE FOR WINDOWS FAÇA O COMANDO "ipconfig" PARA DESCOBRIR O IP
 
   static Future<List<User>> getUsers() async {
     final response = await http.get(Uri.parse('$url/funcionario'));
@@ -24,7 +25,6 @@ class Api {
         Uri.parse('$url/funcionario/add'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'id': user.id,
           'name': user.name,
           'email': user.email,
           'avatarUrl': user.avatarUrl
@@ -42,10 +42,30 @@ class Api {
   }
 
   static Future<void> removeUser(String id) async {
-    final response = await http.delete(Uri.parse('$url/funcionario/$id'));
-
+    final response =
+        await http.delete(Uri.parse('$url/funcionario/delete/$id'));
     if (response.statusCode != 200) {
       throw Exception('Failed to remove user');
+    }
+  }
+
+  static Future<void> updateUser(User user) async {
+    final response = await http.put(
+      Uri.parse('$url/funcionario/update/${user.id}'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'name': user.name,
+        'email': user.email,
+        'avatarUrl': user.avatarUrl,
+        'cargo': user.cargo,
+      }),
+    );
+
+    if (response.statusCode == 200 &&
+        response.body.contains('Usuário atualizado com sucesso')) {
+      print('User updated successfully');
+    } else {
+      throw Exception('Failed to update user: ${response.body}');
     }
   }
 }

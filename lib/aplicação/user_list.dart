@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import './users.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
+import 'api.dart';
+import 'user.dart';
 
 class UserList extends StatefulWidget {
   @override
@@ -9,6 +11,9 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList> {
+  // Variável para armazenar o usuário a ser excluído
+  User? _userToDelete;
+
   @override
   Widget build(BuildContext context) {
     final users = Provider.of<Users>(context);
@@ -34,13 +39,52 @@ class _UserListState extends State<UserList> {
                     IconButton(
                       icon: Icon(Icons.edit),
                       color: Colors.orange,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.USER_FORM,
+                            arguments: users.byIndex(i));
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
                       color: Colors.red,
-                      onPressed: () {},
-                    ),
+                      onPressed: () {
+                        // Define o usuário a ser excluído
+                        _userToDelete = users.byIndex(i);
+                        // Abre o modal de confirmação
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text('Confirmar Exclusão'),
+                            content: Text(
+                              'Deseja realmente excluir o usuário ${_userToDelete!.name}?',
+                            ),
+                            actions: [
+                              TextButton(
+                                child: Text('Cancelar'),
+                                onPressed: () {
+                                  // Fecha o modal de confirmação
+                                  Navigator.of(ctx).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text('Excluir'),
+                                onPressed: () async {
+                                  try {
+                                    final userId = _userToDelete!.id;
+                                    await Api.removeUser(userId);
+                                    users.remove(_userToDelete!);
+                                    // Fecha o modal de confirmação
+                                    Navigator.of(ctx).pop();
+                                  } catch (e) {
+                                    print(e);
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),

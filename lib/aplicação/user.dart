@@ -1,33 +1,33 @@
 class User {
-  final String id;
-  final String name;
-  final String email;
-  final String avatarUrl;
+  String id;
+  String name;
+  String email;
+  String avatarUrl;
+  String cargo;
 
-  User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.avatarUrl,
-  });
+  User(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.avatarUrl,
+      required this.cargo});
 
-  // Implementação do método fromJson
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      avatarUrl: json['avatarUrl'],
-    );
+        id: json['_id'],
+        name: json['name'],
+        email: json['email'],
+        avatarUrl: json['avatarUrl'],
+        cargo: json['cargo']);
   }
 
-  // Implementação do método toJson
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
       'name': name,
       'email': email,
       'avatarUrl': avatarUrl,
+      'cargo': cargo
     };
   }
 }

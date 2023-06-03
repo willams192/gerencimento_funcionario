@@ -28,20 +28,20 @@ class Users with ChangeNotifier {
       // Atualiza um usuário existente
       final index = _items.indexWhere((item) => item.id == user.id);
       _items[index] = User(
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        avatarUrl: user.avatarUrl,
-      );
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          avatarUrl: user.avatarUrl,
+          cargo: user.cargo);
     } else {
       // Adiciona um novo usuário
-      final id = Uuid().v4();
+      final id = user.id;
       final newUser = User(
-        id: id,
-        name: user.name,
-        email: user.email,
-        avatarUrl: user.avatarUrl,
-      );
+          id: id,
+          name: user.name,
+          email: user.email,
+          avatarUrl: user.avatarUrl,
+          cargo: user.cargo);
       _items.add(newUser);
     }
     notifyListeners();
@@ -64,10 +64,24 @@ class Users with ChangeNotifier {
   Future<void> _fetchUsers() async {
     try {
       List<User> users = await Api.getUsers();
-      _items.clear();
-      _items.addAll(users);
+
+      for (var user in users) {
+        if (_items.any((item) => item.id == user.id)) {
+          // Atualiza um usuário existente
+          final index = _items.indexWhere((item) => item.id == user.id);
+          _items[index] = User(
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              avatarUrl: user.avatarUrl,
+              cargo: user.cargo);
+        } else {
+          // Adiciona um novo usuário
+          _items.add(user);
+        }
+      }
     } catch (e) {
-      // não esquecer de fazer os erros -------------------------------------------------------------------------------------------------
+      // Lidar com o erro de forma adequada
     }
   }
 }
