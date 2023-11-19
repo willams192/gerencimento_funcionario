@@ -1,6 +1,5 @@
 # Gerenciador de Funcionarios
 
-Primeiro projeto em flutter consumindo e montando uma API, só esta funcionando o POST o Delete e Update não funciona, os dados só serão atualizados e excluídos localmente e não no banco de dados.
 
 <br><br>
 
